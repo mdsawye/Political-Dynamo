@@ -1,0 +1,11 @@
+
+{
+    "name": "politics",
+    "author": "Michael Sawyer",
+    "main": "server.js",
+    "dependencies": {
+        "express": "*",
+        "mongoose": "*",
+        "body-parser": "*"
+    }
+}
