@@ -1,33 +1,23 @@
 //retrieving a module
 angular
-    .module('politics', [])
-    .controller('PolCtrl', function () {
-        var test = "4";
-        console.log(test);
-    })
-    .controller('FrmCtrl', function ($scope, $http) {
-        $scope.user = {};
-        $scope.SubmitForm = function () {
-            console.log("I submit user form");
-            console.log($scope.user);
-            console.log("start")
-            $http.get('/api/user') //database goes here
-                .then(function (response) {
-                    console.log("in the middle")
-                    console.log(response.data)
+    .module('politics', ['ngRoute'])
+    .config(['$routeProvider',
+        function ($routeProvider) {
+            $routeProvider
+                .when('/', {
+                    templateUrl: 'app/views/home.html',
+                    controller: 'HomeController' //The name of the controllers
+                })
+                .when('/userForm', {
+                    templateUrl: 'app/views/userForm.html',
+                    controller: 'UserFormController'
+                })
+                .when('/usersList', {
+                    templateUrl: 'app/views/usersList.html',
+                    controller: 'UsersListController'
+                })
+                .otherwise({
+                    redirectTo: '/'
                 });
-            console.log("finish")
-            $scope.voter = [];
-
-        }
-    })
-    //.controller('UsrCtrl', function ($scope, $http) {
-    //   console.log("start")
-    //    $http.get('/api/user') //database goes here
-    //        .then(function (response) {
-    //           console.log("in the middle")
-    //        });
-    //    console.log("finish")
-    //    $scope.voter = [];
-    //});
+        }]);
 
