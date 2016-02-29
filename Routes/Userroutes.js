@@ -7,7 +7,15 @@ router.route('/')
 
     // create a user (accessed at POST http://localhost:8080/api/user)
     .post(function(req, res) {
-        
+        //confirm: true
+        //email: "asking4time"
+        //firstname: "bruce"
+        //lastname: "apples"
+        //login: "boss"
+        //password: "1243"
+        //phone: "3444232"
+        //req.body is the object that I pass from the controller in the frontend
+        //the user being created on line 19 is the model
         var user = new usermodel();      // create a new instance of the user model
         user.name = req.body.name;  // set the user name (comes from the request)
         user.login = req.body.login // set the login name
