@@ -16,11 +16,21 @@ router.route('/')
         //phone: "3444232"
         //req.body is the object that I pass from the controller in the frontend
         //the user being created on line 19 is the model
+        //login: String,
+        //    password: String,
+        //    firstname: String,
+        //    lastname: String,
+        //    phone: String,
+        //    email: String,
+        //    about_me: String,
         var user = new usermodel();      // create a new instance of the user model
-        user.name = req.body.name;  // set the user name (comes from the request)
         user.login = req.body.login // set the login name
         user.password = req.body.password // set the password
-        user.email = req.body.email
+        user.firstname = req.body.firstname;  // set the user first name (comes from the request)
+        user.lastname = req.body.lastname;  // set the user last name (comes from the request)
+        user.phone = req.body.phone;  // set the user phone (comes from the request)
+        user.email = req.body.email  // set the user email (comes from the request)
+        user.about_me = req.body.about_me  // set the user about me (comes from the request)
         // save the user and check for errors
         user.save(function(err) {
             if (err)
@@ -92,14 +102,14 @@ router.route('/id/:user_id')
     });
 
 
-     // on routes that end in /user/:user_name
+     // on routes that end in /user/:user_firstname
 // ----------------------------------------------------
-router.route('/name/:user_name')
+router.route('/name/:user_firstname')
 
-  // get the user with that name (accessed at GET http://localhost:8080/api/user/:user_name)
+  // get the user with that name (accessed at GET http://localhost:8080/api/user/:user_firstname)
     .get(function(req, res) { 
-        console.log(req.params.user_name)
-        usermodel.findOne({name:req.params.user_name}, function(err, user) { 
+        console.log(req.params.user_firstname)
+        usermodel.findOne({name:req.params.user_firstname}, function(err, user) {
             if (err)
                 res.send(err);
             res.json(user);
@@ -107,16 +117,16 @@ router.route('/name/:user_name')
     })
 
 
- // update the user with this name (accessed at PUT http://localhost:8080/api/user/:user_name)
+ // update the user with this name (accessed at PUT http://localhost:8080/api/user/:user_firstname)
     .put(function(req, res) {
 
         // use our user model to find the user we want
-         usermodel.findOne({name:req.params.user_name}, function(err, user) {
+         usermodel.findOne({name:req.params.user_firstname}, function(err, user) {
 
             if (err)
                 res.send(err);
 
-            user.name = req.body.name;  // update the user info
+            user.firstname = req.body.firstname;  // update the user info
 
             // save the user
             user.save(function(err) {
@@ -130,10 +140,58 @@ router.route('/name/:user_name')
     })
 
 
-// delete the user with this name (accessed at DELETE http://localhost:8080/api/user/:user_name)
+// delete the user with this name (accessed at DELETE http://localhost:8080/api/user/:user_firstname)
     .delete(function(req, res) {
         usermodel.remove({
-            name: req.params.user_name
+            name: req.params.user_firstname
+        }, function(err, user) {
+            if (err)
+                res.send(err);
+
+            res.json({ message: 'Successfully deleted' });
+        });
+    }); // on routes that end in /user/:user_lastname
+// ----------------------------------------------------
+router.route('/name/:user_lastname')
+
+  // get the user with that name (accessed at GET http://localhost:8080/api/user/:user_lastname)
+    .get(function(req, res) {
+        console.log(req.params.user_lastname)
+        usermodel.findOne({name:req.params.user_lastname}, function(err, user) {
+            if (err)
+                res.send(err);
+            res.json(user);
+        });
+    })
+
+
+ // update the user with this name (accessed at PUT http://localhost:8080/api/user/:user_lastname)
+    .put(function(req, res) {
+
+        // use our user model to find the user we want
+         usermodel.findOne({name:req.params.user_lastname}, function(err, user) {
+
+            if (err)
+                res.send(err);
+
+            user.lastname = req.body.lastname;  // update the user info
+
+            // save the user
+            user.save(function(err) {
+                if (err)
+                    res.send(err);
+
+                res.json({ message: 'user updated!' });
+            });
+
+        });
+    })
+
+
+// delete the user with this name (accessed at DELETE http://localhost:8080/api/user/:user_lastname)
+    .delete(function(req, res) {
+        usermodel.remove({
+            name: req.params.user_lastname
         }, function(err, user) {
             if (err)
                 res.send(err);
