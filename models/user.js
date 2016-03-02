@@ -9,9 +9,6 @@ var userSchema   = new Schema({
     phone: String,
     email: String,
     about_me: String,
-    //party: String,
-    //priority: String,
-    //Decision: String,
 
 
 });

@@ -7,13 +7,6 @@ router.route('/')
 
     // create a user (accessed at POST http://localhost:8080/api/user)
     .post(function(req, res) {
-        //confirm: true
-        //email: "asking4time"
-        //firstname: "bruce"
-        //lastname: "apples"
-        //login: "boss"
-        //password: "1243"
-        //phone: "3444232"
         //req.body is the object that I pass from the controller in the frontend
         //the user being created on line 19 is the model
         //login: String,
@@ -75,8 +68,13 @@ router.route('/id/:user_id')
             if (err)
                 res.send(err);
 
-            user.name = req.body.name;  // update the user info
-
+            user.login = req.body.login;  // update the user info
+            user.password = req.body.password // set the password
+            user.firstname = req.body.firstname;  // set the user first name (comes from the request)
+            user.lastname = req.body.lastname;  // set the user last name (comes from the request)
+            user.phone = req.body.phone;  // set the user phone (comes from the request)
+            user.email = req.body.email  // set the user email (comes from the request)
+            user.about_me = req.body.about_me  // set the user about me (comes from the request
             // save the user
             user.save(function(err) {
                 if (err)
