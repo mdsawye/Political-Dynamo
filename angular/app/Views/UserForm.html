@@ -1,15 +1,15 @@
 <header>
     <div class="container">
         <div class="row">
-            <form name="userform">
+            <form name="userform" novalidate>
 
                 <label for="login">login</label>
-                <input type="text" name="login" ng-model="user.login" placeholder="login name" required><br>
-
+                <input type="text" name="login" ng-model="user.login" placeholder="login name">
+                <p ng-show="loginErrorText" class="error-message">*Login is a required field</p>
 
                 <label for="password">password</label>
-                <input type="password" name="password" ng-model="user.password" placeholder="password" required><br>
-
+                <input type="password" name="password" ng-model="user.password" placeholder="password"><br>
+                <p ng-show="passwordErrorText" class="error-message">*Password is a required field</p>
 
                 <!--<label for="State">State</label>-->
                 <!--<select name="State" ng-model="data.State" ng-options="country for country in ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',-->

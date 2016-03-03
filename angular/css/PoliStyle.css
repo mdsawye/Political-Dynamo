@@ -1,3 +1,8 @@
 textarea,
 input{color: black;
 }
+
+.error-message {
+    color: red;
+    font-size: 15px;
+}
