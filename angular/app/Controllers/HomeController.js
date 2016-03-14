@@ -1,6 +1,8 @@
 angular
     .module('politics')
-    .controller('HomeCtrl', function () {
+    .controller('HomeCtrl', function ($scope, UserServices) {
         var ctrltest = "yes";
         console.log(ctrltest);
-    });
+        
+     
+   })
