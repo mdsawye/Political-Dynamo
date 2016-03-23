@@ -6,6 +6,7 @@ var mongoose   = require('mongoose');
 var userroutes = require("./Routes/Userroutes")
 var Candidateroutes = require("./Routes/Candidateroutes")
 var Authenticationroutes = require("./Routes/Authenticationroutes")
+var Contactroutes = require("./Routes/Contactroutes")
 
 //database connection
 
@@ -29,6 +30,8 @@ var port = process.env.PORT || 8082;        // set our port
 app.use('/api/user', userroutes)
 app.use('/api/authentication',Authenticationroutes )
 app.use('/api/Candidate', Candidateroutes)
+app.use('/api/Contact', Contactroutes)
+
 app.get('*', function(req, res) { res.sendfile('./angular/index.html'); });
 // START THE SERVER
 // =============================================================================

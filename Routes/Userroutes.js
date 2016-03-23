@@ -1,21 +1,33 @@
 var express    = require('express');        // call express
 var router = express.Router();            // get an instance of the express Router
 var usermodel       = require('../models/user');
+var jwt    = require('jsonwebtoken');
 // on routes that end in /user
 // ----------------------------------------------------
+router.use(function(req, res, next){
+    //Check the token
+var token = req.headers.authorization;
+console.log("I have a golden ticket")
+if (!token) {
+    res.status(401).json({message: "No authorized"});
+    return;
+}
+
+// verifies secret and checks exp
+jwt.verify(token, "Zeus", function (err, decoded) {
+    if (err) {
+        return res.status(401).json({message: 'Failed to authenticate token.'});
+    } else {
+        // if everything is good, save to request for use in other routes
+        req.decoded = decoded;
+        next();
+    }
+});
+})
 router.route('/')
 
     // create a user (accessed at POST http://localhost:8080/api/user)
     .post(function(req, res) {
-        //req.body is the object that I pass from the controller in the frontend
-        //the user being created on line 19 is the model
-        //login: String,
-        //    password: String,
-        //    firstname: String,
-        //    lastname: String,
-        //    phone: String,
-        //    email: String,
-        //    about_me: String,
         var user = new usermodel();      // create a new instance of the user model
         user.login = req.body.login // set the login name
         user.password = req.body.password // set the password

@@ -21,9 +21,7 @@ angular
                 password: userpassword
             }
             return $http.post('/api/authentication/login', data);
-            // $http.get('/', function(req, res) {
-            // res.send('WELCOME HOME' + userlogin + '/api/authentication/login');
-            // })
+           
         } 
         return service;
     });

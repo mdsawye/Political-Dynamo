@@ -9,10 +9,13 @@ router.route('/')
     .post(function(req, res) {
 
         var candidate = new Candidatemodel();      // create a new instance of the Candidate model
-        candidate.name = req.body.name;  // set the Candidate name (comes from the request)
-        candidate.login = req.body.login // set the login name
-        candidate.password = req.body.password // set the password
-        candidate.email = req.body.email
+       // candidate.login = req.body.login // set the login name
+       //  candidate.password = req.body.password // set the password
+        candidate.firstname = req.body.firstname;  // set the user first name (comes from the request)
+        candidate.lastname = req.body.lastname;  // set the user last name (comes from the request)
+        candidate.phone = req.body.phone;  // set the user phone (comes from the request)
+        candidate.email = req.body.email  // set the user email (comes from the request)
+        candidate.about_me = req.body.about_me 
         // save the cnadidate and check for errors
         candidate.save(function(err) {
             if (err)

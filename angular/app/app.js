@@ -16,37 +16,21 @@ angular
                     templateUrl: 'app/views/UserList.html',
                     controller: 'UsersListCtrl'
                 })
+                 .when('/News', {
+                    templateUrl: 'app/views/News.html',
+                    controller: 'NewsCtrl'
+                })
+                  .when('/Compatibility', {
+                    templateUrl: 'app/views/Compatibility.html',
+                    controller: 'CompatibilityCtrl'
+                })
+                 .when('/Contact', {
+                    templateUrl: 'app/views/Contact.html',
+                    controller: 'ContactCtrl'
+                })
                 .otherwise({
                     redirectTo: '/'
                 });
         }]);
-    //.controller('PolCtrl', function () {
-    //    var test = "4";
-    //    console.log(test);
-    //})
-    //.controller('FrmCtrl', function ($scope, $http) {
-    //    $scope.user = {};
-    //    $scope.SubmitForm = function () {
-    //        console.log("I submit user form");
-    //        console.log($scope.user);
-    //        console.log("start")
-    //        $http.get('/api/user') //database goes here
-    //            .then(function (response) {
-    //                console.log("in the middle")
-    //                console.log(response.data)
-    //            });
-    //        console.log("finish")
-    //        $scope.voter = [];
-    //
-    //    }
-    //})
-    //.controller('UsrCtrl', function ($scope, $http) {
-    //   console.log("start")
-    //    $http.get('/api/user') //database goes here
-    //        .then(function (response) {
-    //           console.log("in the middle")
-    //        });
-    //    console.log("finish")
-    //    $scope.voter = [];
-    //});
+    
 
