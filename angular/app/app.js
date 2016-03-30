@@ -20,6 +20,22 @@ angular
                     templateUrl: 'app/views/News.html',
                     controller: 'NewsCtrl'
                 })
+                 .when('/News/GlobalIssues', {
+                    templateUrl: 'app/views/GlobalIssues.html',
+                    controller: 'GlobalIssueCtrl'
+                })
+                .when('/News/EconomicIssues', {
+                    templateUrl: 'app/views/EconomicIssues.html',
+                    controller: 'EconomicIssueCtrl'
+                })
+                .when('/News/DomesticIssues', {
+                    templateUrl: 'app/views/DomesticIssues.html',
+                    controller: 'DomesticIssueCtrl'
+                })
+                .when('/News/SocialIssues', {
+                    templateUrl: 'app/views/SocialIssues.html',
+                    controller: 'SocialIssueCtrl'
+                })
                   .when('/Compatibility', {
                     templateUrl: 'app/views/Compatibility.html',
                     controller: 'CompatibilityCtrl'
