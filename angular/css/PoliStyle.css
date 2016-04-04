@@ -4,3 +4,9 @@ input{color: black;
 .ch-info{
 	cursor:pointer;
 }
+.navbar{ 
+	margin-bottom: 0;
+}
+header .container{
+	padding-top: 100px;
+}

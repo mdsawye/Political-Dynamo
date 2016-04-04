@@ -16,9 +16,9 @@
         </div>
     </div>
 </header>
-<div>
-<ul>
-<li ng-repeat="New in News.response.results">{{New.webTitle}}
+<div class="panel panel-default">
+<ul style="list-style-type:none">
+<li class="panel-body" ng-repeat="New in News.response.results"><a target="blank" ng-href="{{New.webUrl}}">{{New.webTitle}}</a>
 </li>
 </ul>
 </div>

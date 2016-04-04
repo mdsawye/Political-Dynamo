@@ -9,7 +9,7 @@ angular
         service.adduser= function(user) {
             console.log("add user in service")
             console.log(user)
-            return $http.post('/api/user',user);
+            return $http.post('/api/authentication/register',user);
         }
 
        service.userlogin= function(userlogin, userpassword) {

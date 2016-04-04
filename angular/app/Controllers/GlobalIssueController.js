@@ -3,7 +3,7 @@ angular
     .controller('GlobalIssueCtrl', ['$scope', '$location', 'NewsServices',function($scope, $location, NewsServices){
         console.log("This is the global controller")
       
-      NewsServices.GetGuardianNews().then(function (result) {
+      NewsServices.GetGlobalGuardianNews().then(function (result) {
             $scope.News = result.data;
             console.log($scope.News)
             console.log($scope.News.response.results[0].webTitle)

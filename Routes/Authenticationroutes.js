@@ -2,8 +2,30 @@ var express    = require('express');        // call express
 var router = express.Router();            // get an instance of the express Router
 var User      = require('../models/user');
 var jwt    = require('jsonwebtoken');
+
 // on routes that end in /user
 // ----------------------------------------------------
+router.route('/register')
+
+    // create a user (accessed at POST http://localhost:8080/api/user)
+    .post(function(req, res) {
+        var user = new User();      // create a new instance of the user model
+        user.login = req.body.login // set the login name
+        user.password = req.body.password // set the password
+        user.firstname = req.body.firstname;  // set the user first name (comes from the request)
+        user.lastname = req.body.lastname;  // set the user last name (comes from the request)
+        user.phone = req.body.phone;  // set the user phone (comes from the request)
+        user.email = req.body.email  // set the user email (comes from the request)
+        user.about_me = req.body.about_me  // set the user about me (comes from the request)
+        // save the user and check for errors
+        user.save(function(err) {
+            if (err)
+                res.send(err);
+
+        res.json({ message: 'user created!' });
+        });
+
+    });
 router.route('/login')
 
     // create a user (accessed at POST http://localhost:8080/api/user)
