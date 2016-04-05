@@ -1,0 +1,19 @@
+<header>
+    <!-- Registration Section -->
+    <section id="compatibility">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Compatibility test</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 question" ng-repeat="question in questions">
+                    <div class="question-text">{{question.question}}</div>
+                    <div class="answer" ng-repeat="answer in question.answers" ng-click="selectAnswer(answer.value)">{{answer.text}}</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</header>
