@@ -31,3 +31,7 @@ header .container{
 	cursor: pointer;
 	font-size: 1.2em;
 }
+
+.clicked {
+    background: #ff0;
+}

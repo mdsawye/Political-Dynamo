@@ -11,8 +11,25 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 question" ng-repeat="question in questions">
                     <div class="question-text">{{question.question}}</div>
-                    <div class="answer" ng-repeat="answer in question.answers" ng-click="selectAnswer(answer.value)">{{answer.text}}</div>
+                    <button class="answer" ng-class="{clicked:answer.checked}" ng-repeat="answer in question.answers" ng-click="selectAnswer(answer, question)" ng-disabled="question.answerdone==true">{{answer.text}}</button>
+                    </div>
                 </div>
+            </div>
+            <button class="btn-success btn" ng-click="Results()" ng-disabled="count!=20">Submit Quiz</button>
+            <div ng-show="showliberaltxt">
+            <p>You are very liberal</p>
+            </div>
+            <div ng-show="showmodliberaltxt">
+            <p>You are moderately liberal</p>
+            </div>
+             <div ng-show="showmoderatetxt">
+            <p>You are moderate</p>
+            </div>
+            <div ng-show="showmodconservativetxt">
+            <p>You are moderately conservative</p>
+            </div>
+             <div ng-show="showconservativetxt">
+            <p>You are highly conservative</p>
             </div>
         </div>
     </section>

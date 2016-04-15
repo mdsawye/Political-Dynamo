@@ -1,10 +1,12 @@
 angular
     .module('politics')
     .controller('CompatibilityCtrl', function ($scope) {
+        $scope.showliberaltxt= false;
+        $scope.showmoderatetxt= false;
+        $scope.showconservativetxt= false;
         console.log("Inside compatibility controller");
         $scope.points = 0;
         $scope.count = 0;
-
         //Add more questions
         $scope.questions = [
             {
@@ -506,22 +508,39 @@ angular
                         value: 2
                     }
                 ]
-            },
+            }
         ];
 
-        $scope.selectAnswer = function(answerValue) {
-            $scope.points = $scope.points + answerValue;
+        $scope.selectAnswer = function(answer, question) {
+            question.answerdone=true;
+            answer.checked=true;
+            $scope.points = $scope.points + answer.value;
             $scope.count++;
+            console.log($scope.points)
+        }
 
-            if($scope.count == 10) {
-                alert("Finish, your result is " + $scope.points);
+        // $('.answer').click(function() {
+        // $(this).toggleClass('clicked');
+        // console.log("This fuction has been executed")
+        // });
+   
+         $scope.Results = function () {
+             
+            if($scope.points >=19 && $scope.points <= 40) {
+                $scope.showliberaltxt= true;
             }
-
-            //Use a if else statements for showing the type of compatibility
-            //Save the user score in database
-
-            console.log("count: " + $scope.count);
-            console.log("points: " + $scope.points);
+             else if($scope.points <=18 && $scope.points >=6) {
+                $scope.showmodLiberaltxt= true;
+            }
+             else if($scope.points <=-19 && $scope.points >=-40) {
+                $scope.showconservativetxt= true;
+            }
+             else if($scope.points >=-18 && $scope.points<=-6) {
+                $scope.showmodconservativetxt= true;
+            }
+             else if($scope.points <=5 && $scope.points >= -5) {
+                $scope.showmoderatetxt= true;
+            }
         }
     });
 
