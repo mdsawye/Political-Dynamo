@@ -1,6 +1,13 @@
 //retrieving a module
 angular
     .module('politics', ["ngRoute"])
+    .run(function($rootScope, $http){
+        // this code will be executed evertime the browser is refreshed
+         $rootScope.userName=localStorage.getItem("userName");
+         $rootScope.admin= localStorage.getItem("admin");
+         $http.defaults.headers.common.Authorization = localStorage.getItem("token")
+
+    })
     .config(['$routeProvider',
         function ($routeProvider) {
             $routeProvider
@@ -36,9 +43,29 @@ angular
                     templateUrl: 'app/views/SocialIssues.html',
                     controller: 'SocialIssueCtrl'
                 })
-                  .when('/Compatibility', {
+                .when('/Compatibility', {
                     templateUrl: 'app/views/Compatibility.html',
                     controller: 'CompatibilityCtrl'
+                })
+                .when('/CandidateProfiles', {
+                    templateUrl: 'app/views/CandidateProfiles.html',
+                    controller: 'CandidateProfilesCtrl'
+                })
+                .when('/FederalCandidateProfiles', {
+                    templateUrl: 'app/views/FederalCandidateProfiles.html',
+                    controller: 'FederalProfilesCtrl'
+                })
+                .when('/StateCandidateProfiles', {
+                    templateUrl: 'app/views/StateCandidateProfiles.html',
+                    controller: 'StateProfilesCtrl'
+                })
+                .when('/JudiciaryCandidateProfiles', {
+                    templateUrl: 'app/views/JudiciaryCandidateProfiles.html',
+                    controller: 'JudiciaryProfilesCtrl'
+                })
+                .when('/CandidateForm', {
+                    templateUrl: 'app/views/CandidateForm.html',
+                    controller: 'CandidateFrmCtrl'
                 })
                  .when('/Contact', {
                     templateUrl: 'app/views/Contact.html',

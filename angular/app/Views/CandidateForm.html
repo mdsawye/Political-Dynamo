@@ -1,0 +1,45 @@
+<header>
+    <div class="container">
+        <div class="row">
+            <form name="candidateform">
+                <br>
+                <label for="firstname">First Name</label>
+                <input type="text" name="firstname" ng-model="candidate.firstname" placeholder="First Name">
+                <label for="lastname">Last Name</label>
+                <input type="text" name="lastname" ng-model="candidate.lastname" placeholder="Last Name">
+                <br>
+                <label class="center" for="image">Candidate Image</label>
+                <input class="center" type="file" name="image" ng-model="candidate.image" placeholder="Candidate Image">
+                <br>
+                <label for="title">Political Title</label>
+                <input type="text" name="title" ng-model="candidate.title" placeholder="Political Title">
+                <br>
+                <label for="level">Political Level</label>
+                <select class="StateSelect" name="level" ng-model="candidate.level" ng-options="x.level for x in levels">{{selectedlevel.levels}}</select>
+                <br>
+                <label for="state">State</label>
+                <select class="StateSelect" name="State" ng-model="candidate.State" ng-options="x.State for x in States">{{selectedState.States}}</select>
+                <br>
+                <label for="district">District</label>
+                <input type="text" name="district" ng-model="candidate.district" placeholder="District">
+                <br>
+                <label for="party">Political Party</label>
+                <select class="StateSelect" name="party" ng-model="candidate.party" ng-options="x.party for x in parties">{{selectedparty.parties}}</select>
+                <br>
+                <label for="status">Political Status</label>
+                <select class="StateSelect" name="status" ng-model="candidate.status" ng-options="x.status for x in statuses">{{selectedstatus.statuses}}</select>
+                <br>
+                <label for="website">Website</label>
+                <input type="text" name="website" ng-model="candidate.website" placeholder="Candidate Website">
+                <label for="about_me">About Candidate</label>
+                <textarea ng-model="candidate.about" name="about_candidate"></textarea>
+                <br>
+                <label for="confirm">Confirm</label>
+                <input type="checkbox" name="confirm" ng-model="candidate.confirm">
+                <br>
+                <button class="btn-success btn" ng-click="SubmitForm()">Submit</button>
+            </form>
+        </div>
+    </div>
+</header>
+<!-- <select class="StateSelect" name="status" ng-model="data.status" ng-options="x.status for x in statuses">{{selectedstatus.statuses}}</select> -->

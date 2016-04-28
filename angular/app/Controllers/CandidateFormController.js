@@ -1,9 +1,9 @@
 angular
     .module('politics')
-    .controller('UsrFrmCtrl', function ($scope, $rootScope, $http, $filter, UserServices) {
-        $scope.user = {};
-        $scope.userlogin = ""
-        $scope.userpassword = ""
+    .controller('CandidateFrmCtrl', function ($scope,$http,$rootScope, $location, CandidateServices, UserServices) {
+        $scope.parties= [{party:"Democrat"}, {party:"Republican"}, {party:"Independent"}]
+        $scope.statuses= [{status:'active'}, {status:'inactive'}]
+        $scope.levels= [{level:'Federal'}, {level:'State'}]
         $scope.States= [{State:'Alabama'}, {State:'Alaska'}, {State:'Arizona'}, {State:'Arkansas'}, {State:'California'}, {State:'Colorado'},
                 {State:'Connecticut'}, {State:'Delaware'}, {State:'Florida'}, {State:'Georgia'}, {State:'Hawaii'},
                 {State:'Idaho'}, {State:'Illinois'}, {State:'Indiana'}, {State:'Iowa'}, {State:'Kansas'}, {State:'Kentucky'}, {State:'Louisiana'}, {State:'Maine'}, {State:'Maryland'}, {State:'Massachusetts'}, {State:'Michigan'}, {State:'Minnesota'}, {State:'Mississippi'},
@@ -12,13 +12,20 @@ angular
                 {State:'South Dakota'}, {State:'Tennessee'}, {State:'Texas'}, {State:'Utah'}, {State:'Vermont'},
                 {State:'Virginia'}, {State:'Washington'}, {State:'West Virginia'}, {State:'Wisconsin'},
                 {State:'Wyoming'}]
-
+         
+         UserServices.admincheck($rootScope.userName).then(function(result){
+                if(result.data.admin == false ){
+                   $location.path('/');
+                }
+              
+            });
+         
+        $scope.candidate = {};
         $scope.SubmitForm = function () {
-            UserServices.adduser($scope.user).then(function(){
-                alert("user has been created")
+            CandidateServices.addcandidate($scope.candidate).then(function(){
+                alert("Candidate's profile has been saved")
             })
 
         }
-       
+     
     });
-

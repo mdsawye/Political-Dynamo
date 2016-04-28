@@ -1,17 +1,18 @@
 var mongoose = require('mongoose');
-var Schema       = mongoose.Schema;
+var Schema = mongoose.Schema;
 
-var CandidateSchema   = new Schema({
-    name: String,
-    login: String,
-    password: String,
-    email: String,
-    phone: String,
+var CandidateSchema = new Schema({
+    firstname: String,
+    lastname: String,
+    image: String,
+    title: String,
+    level: String,
     state: String,
+    district: String,
     party: String,
-    politicaloffice: String,
-    priority: String,
-    Decision: String,
+    status: String,
+    website: String,
+    about_me: String,
 
 
 

@@ -23,5 +23,15 @@ angular
             return $http.post('/api/authentication/login', data);
            
         } 
+        service.admincheck= function(admincheck){
+            return $http.get('/api/authentication/admincheck/'+ admincheck);
+        }
+        // service.adminname= function(adminname){
+        //     console.log(adminname)
+        //     var data ={
+        //         admin: userName
+        //     }
+        //     return $http.get('/api/authentication/admincheck/userName', admin)
+        // }
         return service;
     });

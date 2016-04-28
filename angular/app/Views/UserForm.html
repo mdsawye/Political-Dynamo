@@ -11,15 +11,8 @@
                 <input type="password" name="password" ng-model="user.password" placeholder="password" required><br>
 
 
-                <!--<label for="State">State</label>-->
-                <!--<select name="State" ng-model="data.State" ng-options="country for country in ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',-->
-                <!--'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',-->
-                <!--'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',-->
-                <!--'Missouri', 'Montana', 'Nebraska', 'Nevada',             'New Hampshire', 'New Jersey', 'New Mexico', 'New York',-->
-                <!--'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina',-->
-                <!--'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',-->
-                <!--'Virginia', 'Washington', 'West Virginia', 'Wisconsin',-->
-                <!--'Wyoming']" required>...</select>-->
+                <label for="State">State</label>
+                <select class="StateSelect" name="State" ng-model="data.State" ng-options="x.State for x in States">{{selectedState.State}}</select>
 
                 <br>
                 <label for="firstname">First Name</label>
