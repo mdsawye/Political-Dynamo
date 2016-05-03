@@ -1,6 +1,6 @@
 //retrieving a module
 angular
-    .module('politics', ["ngRoute"])
+    .module('politics', ["ngRoute", "ngImgCrop"])
     .run(function($rootScope, $http){
         // this code will be executed evertime the browser is refreshed
          $rootScope.userName=localStorage.getItem("userName");

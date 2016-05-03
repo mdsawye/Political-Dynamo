@@ -26,12 +26,14 @@ angular
         service.admincheck= function(admincheck){
             return $http.get('/api/authentication/admincheck/'+ admincheck);
         }
-        // service.adminname= function(adminname){
-        //     console.log(adminname)
-        //     var data ={
-        //         admin: userName
-        //     }
-        //     return $http.get('/api/authentication/admincheck/userName', admin)
-        // }
+        service.compatibilityresults= function(points, results, userName){
+            var data ={
+                userproof: userName,
+                total: points,
+                results: results
+            }
+            return $http.put('/api/user/testresults', data)
+        }
+        
         return service;
     });

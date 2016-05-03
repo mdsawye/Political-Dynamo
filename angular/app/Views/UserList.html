@@ -4,18 +4,24 @@
             <h2>Users List</h2>
             <table class="table usersListTable">
                 <tr>
-                    <th>Id</th>
                     <th>Login</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
                     <th>Email</th>
                     <th>Password</th>
+                    <th>Points</th>
+                    <th>Results</th>
+
                 </tr>
 
                 <tr ng-repeat="user in users">
-                    <td>{{user._id}}</td>
+                    <td>{{user.login}}</td>
                     <td>{{user.firstname}}</td>
                     <td>{{user.lastname}}</td>
                     <td>{{user.email}}</td>
                     <td>{{user.password}}</td>
+                    <td>{{user.points}}</td>
+                    <td>{{user.testresults}}</td>
                 </tr>
             </table>
         </div>

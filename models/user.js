@@ -9,6 +9,8 @@ var userSchema   = new Schema({
     phone: String,
     email: String,
     about_me: String,
+    testresults: String,
+    points: Number,
 
 
 });

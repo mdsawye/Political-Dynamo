@@ -5,5 +5,6 @@ angular
 
         UserServices.getAllUsers().then(function (result) {
             $scope.users = result.data;
+            console.log($scope.users)
         });
     })

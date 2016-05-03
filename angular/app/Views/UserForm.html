@@ -12,7 +12,7 @@
 
 
                 <label for="State">State</label>
-                <select class="StateSelect" name="State" ng-model="data.State" ng-options="x.State for x in States">{{selectedState.State}}</select>
+                <select class="StateSelect" name="State" ng-model="data.State" ng-options="x.State as x.State for x in States">{{selectedState.States}}</select>
 
                 <br>
                 <label for="firstname">First Name</label>

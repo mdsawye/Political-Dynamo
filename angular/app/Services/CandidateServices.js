@@ -20,6 +20,11 @@ angular
             console.log("add candidate in service")
             console.log(candidate)
             return $http.post('/api/candidate/register',candidate);
+        };
+         service.updatecandidate= function(candidate) {
+            console.log("update candidate in service")
+            console.log(candidate)
+            return $http.put('/api/candidate/name',candidate);
         }
         
         return service;

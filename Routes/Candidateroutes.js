@@ -1,28 +1,29 @@
 var express = require('express'); // call express
 var router = express.Router(); // get an instance of the express Router
 var Candidatemodel = require('../models/Candidate');
-var jwt    = require('jsonwebtoken');
+var jwt = require('jsonwebtoken');
+var cloudinary = require('cloudinary');
 // on routes that end in /Candidate
 // ----------------------------------------------------
-router.use(function(req, res, next){
+router.use(function(req, res, next) {
     //Check the token
-var token = req.headers.authorization;
-console.log("I have a golden ticket")
-if (!token) {
-    res.status(401).json({message: "No authorized"});
-    return;
-}
-
-// verifies secret and checks exp
-jwt.verify(token, "Zeus", function (err, decoded) {
-    if (err) {
-        return res.status(401).json({message: 'Failed to authenticate token.'});
-    } else {
-        // if everything is good, save to request for use in other routes
-        req.decoded = decoded;
-        next();
+    var token = req.headers.authorization;
+    console.log("I have a golden ticket")
+    if (!token) {
+        res.status(401).json({ message: "No authorized" });
+        return;
     }
-});
+
+    // verifies secret and checks exp
+    jwt.verify(token, "Zeus", function(err, decoded) {
+        if (err) {
+            return res.status(401).json({ message: 'Failed to authenticate token.' });
+        } else {
+            // if everything is good, save to request for use in other routes
+            req.decoded = decoded;
+            next();
+        }
+    });
 })
 router.route('/register')
 
@@ -45,10 +46,12 @@ router.route('/register')
     candidate.about_candidate = req.body.about_candidate;
     // save the candidate and check for errors
     candidate.save(function(err) {
-        if (err)
+        if (err) {
             res.send(err);
+        } else {
 
-        res.json({ message: 'Candidate created!' });
+            res.json({ message: 'Candidate created!' });
+        }
     });
 });
 
@@ -56,43 +59,48 @@ router.route('/')
 
 .get(function(req, res) {
     Candidatemodel.find(function(err, candidate) {
-        if (err)
+        if (err) {
             res.send(err);
+        } else {
 
-        res.json(candidate);
+            res.json(candidate);
+        }
     });
 });
 
 router.route('/Federal')
 
 .get(function(req, res) {
-    Candidatemodel.find({level:"Federal"}, function(err, candidate) {
-        if (err)
+    Candidatemodel.find({ level: "Federal" }, function(err, candidate) {
+        if (err) {
             res.send(err);
-
-        res.json(candidate);
+        } else {
+            res.json(candidate);
+        }
     });
 });
 
 router.route('/State')
 
 .get(function(req, res) {
-    Candidatemodel.find({level:"State"}, function(err, candidate) {
-        if (err)
+    Candidatemodel.find({ level: "State" }, function(err, candidate) {
+        if (err) {
             res.send(err);
-
-        res.json(candidate);
+        } else {
+            res.json(candidate);
+        }
     });
 });
 
 router.route('/Judiciary')
 
 .get(function(req, res) {
-    Candidatemodel.find({level:"State"}, function(err, candidate) {
-        if (err)
+    Candidatemodel.find({ level: "State" }, function(err, candidate) {
+        if (err) {
             res.send(err);
-
-        res.json(candidate);
+        } else {
+            res.json(candidate);
+        }
     });
 });
 // on routes that end in /candidate/:candidate_id
@@ -103,9 +111,11 @@ router.route('/id/:candidate_id')
 .get(function(req, res) {
     console.log(req.params.candidate_id)
     Candidatemodel.findById(req.params.candidate_id, function(err, candidate) {
-        if (err)
+        if (err) {
             res.send(err);
-        res.json(candidate);
+        } else {
+            res.json(candidate);
+        }
     });
 })
 
@@ -116,17 +126,19 @@ router.route('/id/:candidate_id')
     // use our user model to find the candidate we want
     Candidatemodel.findById(req.params.candidate_id, function(err, candidate) {
 
-        if (err)
+        if (err) {
             res.send(err);
-
-        candidate.name = req.body.name; // update the candidate info
+        } else {
+            candidate.name = req.body.name; // update the candidate info
+        }
 
         // save the candidate
         candidate.save(function(err) {
-            if (err)
+            if (err) {
                 res.send(err);
-
-            res.json({ message: 'candidate updated!' });
+            } else {
+                res.json({ message: 'candidate updated!' });
+            }
         });
 
     });
@@ -138,10 +150,11 @@ router.route('/id/:candidate_id')
     Candidatemodel.remove({
         _id: req.params.candidate_id
     }, function(err, candidate) {
-        if (err)
+        if (err) {
             res.send(err);
-
-        res.json({ message: 'Successfully deleted' });
+        } else {
+            res.json({ message: 'Successfully deleted' });
+        }
     });
 });
 
@@ -154,9 +167,11 @@ router.route('/name/:candidate_name')
 .get(function(req, res) {
     console.log(req.params.candidate_name)
     Candidatemodel.findOne({ name: req.params.candidate_name }, function(err, candidate) {
-        if (err)
+        if (err) {
             res.send(err);
-        res.json(candidate);
+        } else {
+            res.json(candidate);
+        }
     });
 })
 
@@ -167,17 +182,19 @@ router.route('/name/:candidate_name')
     // use our candidate model to find the candidate we want
     Candidatemodel.findOne({ name: req.params.candidate_name }, function(err, candidate) {
 
-        if (err)
+        if (err) {
             res.send(err);
-
-        candidate.name = req.body.name; // update the candidate info
+        } else {
+            candidate.name = req.body.name; // update the candidate info
+        }
 
         // save the candidate
         candidate.save(function(err) {
-            if (err)
+            if (err) {
                 res.send(err);
-
-            res.json({ message: 'candidate updated!' });
+            } else {
+                res.json({ message: 'candidate updated!' });
+            }
         });
 
     });
@@ -189,12 +206,15 @@ router.route('/name/:candidate_name')
     Candidatemodel.remove({
         name: req.params.candidate_name
     }, function(err, candidate) {
-        if (err)
+        if (err) {
             res.send(err);
-
-        res.json({ message: 'Successfully deleted' });
+        } else {
+            res.json({
+                message: 'Successfully deleted'
+            });
+        }
     });
-});
+})
 
 
 // on routes that end in /candidate/:candidate_image
@@ -205,9 +225,11 @@ router.route('/image/:candidate_image')
 .get(function(req, res) {
     console.log(req.params.candidate_image)
     Candidatemodel.findOne({ image: req.params.candidate_image }, function(err, candidate) {
-        if (err)
+        if (err) {
             res.send(err);
-        res.json(candidate);
+        } else {
+            res.json(candidate);
+        }
     });
 })
 
@@ -218,19 +240,21 @@ router.route('/image/:candidate_image')
     // use our candidate model to find the candidate we want
     Candidatemodel.findOne({ image: req.params.candidate_image }, function(err, candidate) {
 
-        if (err)
+        if (err) {
             res.send(err);
+        } else {
+            candidate.name = req.body.name; // update the candidate info
 
-        candidate.name = req.body.name; // update the candidate info
+            // save the candidate
+            candidate.save(function(err) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.json({ message: 'candidate updated!' });
+                }
 
-        // save the candidate
-        candidate.save(function(err) {
-            if (err)
-                res.send(err);
-
-            res.json({ message: 'candidate updated!' });
-        });
-
+            });
+        }
     });
 })
 
@@ -240,10 +264,11 @@ router.route('/image/:candidate_image')
     Candidatemodel.remove({
         login: req.params.candidate_image
     }, function(err, candidate) {
-        if (err)
+        if (err) {
             res.send(err);
-
-        res.json({ message: 'Successfully deleted' });
+        } else {
+            res.json({ message: 'Successfully deleted' });
+        }
     });
 });
 
@@ -256,9 +281,11 @@ router.route('/title/:candidate_title')
 .get(function(req, res) {
     console.log(req.params.candidate_title)
     Candidatemodel.findOne({ title: req.params.candidate_title }, function(err, candidate) {
-        if (err)
+        if (err) {
             res.send(err);
-        res.json(candidate);
+        } else {
+            res.json(candidate);
+        }
     });
 })
 
@@ -269,17 +296,18 @@ router.route('/title/:candidate_title')
     // use our candidate model to find the candidate we want
     Candidatemodel.findOne({ title: req.params.candidate_title }, function(err, candidate) {
 
-        if (err)
+        if (err) {
             res.send(err);
-
-        candidate.name = req.body.name; // update the candidate info
-
+        } else {
+            candidate.name = req.body.name; // update the candidate info
+        }
         // save the candidate
         candidate.save(function(err) {
-            if (err)
+            if (err) {
                 res.send(err);
-
-            res.json({ message: 'candidate updated!' });
+            } else {
+                res.json({ message: 'candidate updated!' });
+            }
         });
 
     });
@@ -291,10 +319,11 @@ router.route('/title/:candidate_title')
     Candidatemodel.remove({
         title: req.params.candidate_title
     }, function(err, candidate) {
-        if (err)
+        if (err) {
             res.send(err);
-
-        res.json({ message: 'Successfully deleted' });
+        } else {
+            res.json({ message: 'Successfully deleted' });
+        }
     });
 });
 
@@ -306,9 +335,11 @@ router.route('/state/:candidate_state')
 .get(function(req, res) {
     console.log(req.params.candidate_state)
     Candidatemodel.findOne({ state: req.params.candidate_state }, function(err, candidate) {
-        if (err)
+        if (err) {
             res.send(err);
-        res.json(candidate);
+        } else {
+            res.json(candidate);
+        }
     });
 })
 
@@ -319,17 +350,19 @@ router.route('/state/:candidate_state')
     // use our candidate model to find the candidate we want
     Candidatemodel.findOne({ state: req.params.candidate_state }, function(err, candidate) {
 
-        if (err)
+        if (err) {
             res.send(err);
-
-        candidate.name = req.body.name; // update the candidate info
+        } else {
+            candidate.name = req.body.name; // update the candidate info
+        }
 
         // save the candidate
         candidate.save(function(err) {
-            if (err)
+            if (err) {
                 res.send(err);
-
-            res.json({ message: 'candidate updated!' });
+            } else {
+                res.json({ message: 'candidate updated!' });
+            }
         });
 
     });
@@ -341,10 +374,11 @@ router.route('/state/:candidate_state')
     Candidatemodel.remove({
         state: req.params.candidate_state
     }, function(err, candidate) {
-        if (err)
+        if (err) {
             res.send(err);
-
-        res.json({ message: 'Successfully deleted' });
+        } else {
+            res.json({ message: 'Successfully deleted' });
+        }
     });
 });
 
@@ -356,9 +390,11 @@ router.route('/district/:candidate_district')
 .get(function(req, res) {
     console.log(req.params.candidate_district)
     Candidatemodel.findOne({ district: req.params.candidate_district }, function(err, candidate) {
-        if (err)
+        if (err) {
             res.send(err);
-        res.json(candidate);
+        } else {
+            res.json(candidate);
+        }
     });
 })
 
@@ -369,17 +405,19 @@ router.route('/district/:candidate_district')
     // use our candidate model to find the candidate we want
     Candidatemodel.findOne({ district: req.params.candidate_district }, function(err, candidate) {
 
-        if (err)
+        if (err) {
             res.send(err);
-
-        candidate.name = req.body.name; // update the candidate info
+        } else {
+            candidate.name = req.body.name; // update the candidate info
+        }
 
         // save the candidate
         candidate.save(function(err) {
-            if (err)
+            if (err) {
                 res.send(err);
-
-            res.json({ message: 'candidate updated!' });
+            } else {
+                res.json({ message: 'candidate updated!' });
+            }
         });
 
     });
@@ -391,10 +429,11 @@ router.route('/district/:candidate_district')
     Candidatemodel.remove({
         district: req.params.candidate_district
     }, function(err, candidate) {
-        if (err)
+        if (err) {
             res.send(err);
-
-        res.json({ message: 'Successfully deleted' });
+        } else {
+            res.json({ message: 'Successfully deleted' });
+        }
     });
 });
 
@@ -406,9 +445,11 @@ router.route('/level/:candidate_level')
 .get(function(req, res) {
     console.log(req.params.candidate_level)
     Candidatemodel.findOne({ level: req.params.candidate_level }, function(err, candidate) {
-        if (err)
+        if (err) {
             res.send(err);
-        res.json(candidate);
+        } else {
+            res.json(candidate);
+        }
     });
 })
 
@@ -416,23 +457,23 @@ router.route('/level/:candidate_level')
 // update the candidate with this level (accessed at PUT http://localhost:8080/api/candidate/:candidate_level)
 // .put(function(req, res) {
 
-    // // use our candidate model to find the candidate we want
-    // Candidatemodel.findOne({ level: req.params.candidate_level }, function(err, candidate) {
+// // use our candidate model to find the candidate we want
+// Candidatemodel.findOne({ level: req.params.candidate_level }, function(err, candidate) {
 
-    //     if (err)
-    //         res.send(err);
+//     if (err)
+//         res.send(err);
 
-    //     candidate.name = req.body.name; // update the candidate info
+//     candidate.name = req.body.name; // update the candidate info
 
-        // save the candidate
-    //     candidate.save(function(err) {
-    //         if (err)
-    //             res.send(err);
+// save the candidate
+//     candidate.save(function(err) {
+//         if (err)
+//             res.send(err);
 
-    //         res.json({ message: 'candidate updated!' });
-    //     });
+//         res.json({ message: 'candidate updated!' });
+//     });
 
-    // });
+// });
 // })
 
 
@@ -441,10 +482,11 @@ router.route('/level/:candidate_level')
     Candidatemodel.remove({
         level: req.params.candidate_level
     }, function(err, candidate) {
-        if (err)
+        if (err) {
             res.send(err);
-
-        res.json({ message: 'Successfully deleted' });
+        } else {
+            res.json({ message: 'Successfully deleted' });
+        }
     });
 });
 
@@ -456,9 +498,11 @@ router.route('/party/:candidate_party')
 .get(function(req, res) {
     console.log(req.params.candidate_party)
     Candidatemodel.findOne({ party: req.params.candidate_party }, function(err, candidate) {
-        if (err)
+        if (err) {
             res.send(err);
-        res.json(candidate);
+        } else {
+            res.json(candidate);
+        }
     });
 })
 
@@ -469,17 +513,19 @@ router.route('/party/:candidate_party')
     // use our candidate model to find the candidate we want
     Candidatemodel.findOne({ party: req.params.candidate_party }, function(err, candidate) {
 
-        if (err)
+        if (err) {
             res.send(err);
-
-        candidate.name = req.body.name; // update the candidate info
+        } else {
+            candidate.name = req.body.name; // update the candidate info
+        }
 
         // save the candidate
         candidate.save(function(err) {
-            if (err)
+            if (err) {
                 res.send(err);
-
-            res.json({ message: 'candidate updated!' });
+            } else {
+                res.json({ message: 'candidate updated!' });
+            }
         });
 
     });
@@ -491,10 +537,11 @@ router.route('/party/:candidate_party')
     Candidatemodel.remove({
         party: req.params.candidate_party
     }, function(err, candidate) {
-        if (err)
+        if (err) {
             res.send(err);
-
-        res.json({ message: 'Successfully deleted' });
+        } else {
+            res.json({ message: 'Successfully deleted' });
+        }
     });
 });
 
@@ -506,9 +553,11 @@ router.route('/status/:candidate_status')
 .get(function(req, res) {
     console.log(req.params.candidate_status)
     Candidatemodel.findOne({ status: req.params.candidate_status }, function(err, candidate) {
-        if (err)
+        if (err) {
             res.send(err);
-        res.json(candidate);
+        } else {
+            res.json(candidate);
+        }
     });
 })
 
@@ -519,17 +568,19 @@ router.route('/status/:candidate_status')
     // use our candidate model to find the candidate we want
     Candidatemodel.findOne({ status: req.params.candidate_status }, function(err, candidate) {
 
-        if (err)
+        if (err) {
             res.send(err);
-
-        candidate.name = req.body.name; // update the candidate info
+        } else {
+            candidate.name = req.body.name; // update the candidate info
+        }
 
         // save the candidate
         candidate.save(function(err) {
-            if (err)
+            if (err) {
                 res.send(err);
-
-            res.json({ message: 'candidate updated!' });
+            } else {
+                res.json({ message: 'candidate updated!' });
+            }
         });
 
     });
@@ -541,10 +592,11 @@ router.route('/status/:candidate_status')
     Candidatemodel.remove({
         status: req.params.candidate_status
     }, function(err, candidate) {
-        if (err)
+        if (err) {
             res.send(err);
-
-        res.json({ message: 'Successfully deleted' });
+        } else {
+            res.json({ message: 'Successfully deleted' });
+        }
     });
 });
 module.exports = router
