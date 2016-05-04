@@ -92,3 +92,6 @@ header .container{
 .cropArea{
     height:300px;
 }
+.userlistalignment{
+    text-align: left;
+}
