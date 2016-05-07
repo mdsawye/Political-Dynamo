@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 var CandidateSchema = new Schema({
     firstname: String,
     lastname: String,
-    image: String,
+    image_id:String,
+    image_url: String,
     title: String,
     level: String,
     state: String,

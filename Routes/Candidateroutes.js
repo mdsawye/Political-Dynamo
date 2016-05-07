@@ -29,13 +29,15 @@ router.route('/register')
 
 // create a Candidate (accessed at POST http://localhost:8080/api/user)
 .post(function(req, res) {
-
-    var candidate = new Candidatemodel(); // create a new instance of the Candidate model
+    cloudinary.uploader.upload(req.body.image, function(result) { 
+  console.log(result) 
+   var candidate = new Candidatemodel(); // create a new instance of the Candidate model
     // candidate.login = req.body.login // set the login name
     //  candidate.password = req.body.password // set the password
     candidate.firstname = req.body.firstname; // set the user first name (comes from the request)
     candidate.lastname = req.body.lastname; // set the user last name (comes from the request)
-    candidate.image = req.body.image; // set the user image (comes from the request)
+    candidate.image_id=result.public_id
+    candidate.image_url=result.url
     candidate.title = req.body.title; // set the user title (comes from the request)
     candidate.level = req.body.level;
     candidate.state = req.body.state;
@@ -53,6 +55,9 @@ router.route('/register')
             res.json({ message: 'Candidate created!' });
         }
     });
+});
+
+
 });
 
 router.route('/')
