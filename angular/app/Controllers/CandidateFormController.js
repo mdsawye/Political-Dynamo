@@ -27,6 +27,7 @@ angular
             reader.readAsDataURL(file);
         };
         angular.element(document.querySelector('#fileInput')).on('change', handleFileSelect);
+
         UserServices.admincheck($rootScope.userName).then(function(result) {
             if (result.data.admin == false) {
                 $location.path('/');
@@ -35,18 +36,18 @@ angular
         });
 
         $scope.candidate = {};
-        $scope.SaveForm = function() {
+        $scope.SubmitForm = function() {
             $scope.candidate.image = $scope.myCroppedImage
             CandidateServices.addcandidate($scope.candidate).then(function() {
                 alert("Candidate's profile has been saved")
             })
-          }
-            $scope.UpdateForm = function() {
-                $scope.candidate.image = $scope.myCroppedImage
-                CandidateServices.updatecandidate($scope.candidate).then(function() {
-                    alert("Candidate's updates have been saved")
-                })
+        }
+        $scope.UpdateForm = function() {
+            $scope.candidate.image = $scope.myCroppedImage
+            CandidateServices.updatecandidate($scope.candidate).then(function() {
+                alert("Candidate's updates have been saved")
+            })
 
-            }
+        }
 
     });
