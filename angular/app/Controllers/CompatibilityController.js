@@ -391,20 +391,25 @@ angular
                 politicalleanins="Liberal"
             } else if ($scope.points <= 18 && $scope.points >= 6) {
                 $scope.showmodLiberaltxt = true;
-                politicalleanins="modLiberal"
+                politicalleanins="Moderate Liberal"
             } else if ($scope.points <= -19 && $scope.points >= -40) {
                 $scope.showconservativetxt = true;
-                politicalleanins="conservative"
+                politicalleanins="Conservative"
             } else if ($scope.points >= -18 && $scope.points <= -6) {
                 $scope.showmodconservativetxt = true;
-                politicalleanins="modconservative"
+                politicalleanins="Moderate Conservative"
             } else if ($scope.points <= 5 && $scope.points >= -5) {
                 $scope.showmoderatetxt = true;
-                politicalleanins="moderate"
+                politicalleanins="Moderate"
             }
             UserServices.compatibilityresults($scope.points, politicalleanins, $rootScope.userName).then(function() {
                 console.log("results updated")
             })
+        }
+
+        $scope.Doughnutgraph = function(){
+            $scope.labels = ["Liberal", "Moderate Liberal", "Moderate", "Moderate Conservative", "Conservative"];
+            $scope.data = $scope.points
         }
   
 

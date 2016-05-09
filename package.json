@@ -3,6 +3,7 @@
   "author": "Michael Sawyer",
   "main": "server.js",
   "dependencies": {
+    "angular-chart.js": "^0.10.2",
     "body-parser": "*",
     "express": "*",
     "jsonwebtoken": "^5.7.0",
