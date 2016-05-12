@@ -14,22 +14,33 @@
                     <button class="answer" ng-class="{clicked:answer.checked}" ng-repeat="answer in question.answers" ng-click="selectAnswer(answer, question)" ng-disabled="question.answerdone==true">{{answer.text}}</button>
                 </div>
             </div>
+            <!-- Multiple canvas tags used to show graphic with each txt -->
         </div>
         <button class="btn-success btn" ng-click="Results()" ng-disabled="count!=20">Submit Quiz</button>
         <div ng-show="showliberaltxt">
             <p>You are very liberal</p>
+            <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels">
+            </canvas>
         </div>
         <div ng-show="showmodliberaltxt">
             <p>You are moderately liberal</p>
+            <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels">
+            </canvas>
         </div>
         <div ng-show="showmoderatetxt">
             <p>You are moderate</p>
+            <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels">
+            </canvas>
         </div>
         <div ng-show="showmodconservativetxt">
             <p>You are moderately conservative</p>
+            <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels">
+            </canvas>
         </div>
         <div ng-show="showconservativetxt">
             <p>You are highly conservative</p>
+            <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels">
+            </canvas>
         </div>
         </div>
     </section>

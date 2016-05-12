@@ -378,35 +378,47 @@ angular
             console.log($scope.points)
         }
 
-        // $('.answer').click(function() {
-        // $(this).toggleClass('clicked');
-        // console.log("This fuction has been executed")
-        // });
+        // This was added to sort data for pie chart
+        $scope.sortAnswer = function(answer, question) {
+            question.answerdone = true;
+            answer.checked = true;
+            answer.isSelected = true;
+            $scope.count++;
+            angular.forEach($scope.selectAnswer, function(answer) {
+                count += answer.isSelected ? -2 : -1: 0: 1: 2;
+            });
+            console.log($scope.count)
+        }
+
+        $scope.piechart = function($scope) {
+            $scope.labels = ["Conservative", "Moderate Conservative", "Moderate", "Moderate Liberal", "Liberal"];
+            $scope.data = $scope.count;
+        };
 
         $scope.Results = function() {
             var politicalleanins;
 
             if ($scope.points >= 19 && $scope.points <= 40) {
                 $scope.showliberaltxt = true;
-                politicalleanins="Liberal"
+                politicalleanins = "Liberal"
             } else if ($scope.points <= 18 && $scope.points >= 6) {
                 $scope.showmodLiberaltxt = true;
-                politicalleanins="modLiberal"
+                politicalleanins = "modLiberal"
             } else if ($scope.points <= -19 && $scope.points >= -40) {
                 $scope.showconservativetxt = true;
-                politicalleanins="conservative"
+                politicalleanins = "conservative"
             } else if ($scope.points >= -18 && $scope.points <= -6) {
                 $scope.showmodconservativetxt = true;
-                politicalleanins="modconservative"
+                politicalleanins = "modconservative"
             } else if ($scope.points <= 5 && $scope.points >= -5) {
                 $scope.showmoderatetxt = true;
-                politicalleanins="moderate"
+                politicalleanins = "moderate"
             }
             UserServices.compatibilityresults($scope.points, politicalleanins, $rootScope.userName).then(function() {
                 console.log("results updated")
             })
         }
-  
 
 
-});
+
+    });
