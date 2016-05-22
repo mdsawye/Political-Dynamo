@@ -46,6 +46,8 @@ router.route('/register')
     candidate.status = req.body.status;
     candidate.website = req.body.website;
     candidate.about_candidate = req.body.about_candidate;
+    candidate.testresults = req.body.testresults;
+    candidate.points = req.body.points;
     // save the candidate and check for errors
     candidate.save(function(err) {
         if (err) {
@@ -459,28 +461,6 @@ router.route('/level/:candidate_level')
 })
 
 
-// update the candidate with this level (accessed at PUT http://localhost:8080/api/candidate/:candidate_level)
-// .put(function(req, res) {
-
-// // use our candidate model to find the candidate we want
-// Candidatemodel.findOne({ level: req.params.candidate_level }, function(err, candidate) {
-
-//     if (err)
-//         res.send(err);
-
-//     candidate.name = req.body.name; // update the candidate info
-
-// save the candidate
-//     candidate.save(function(err) {
-//         if (err)
-//             res.send(err);
-
-//         res.json({ message: 'candidate updated!' });
-//     });
-
-// });
-// })
-
 
 // delete the candidate with this level(accessed at DELETE http://localhost:8080/api/candidate/:candidate_level)
 .delete(function(req, res) {
@@ -604,4 +584,64 @@ router.route('/status/:candidate_status')
         }
     });
 });
+
+// on routes that end in /candidate/:testresults
+// ----------------------------------------------------
+router.route('/testresults/:candidate_name')
+
+// get the user with that id (accessed at GET http://localhost:8080/api/candidate/:testresults)
+.get(function(req, res) {
+    console.log(req.params.candidate_testresults)
+    Candidatemodel.findOne({ name: req.params.candidate_name }, function(err, candidate) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(candidate);
+        }
+    });
+})
+
+
+// update the user with this email (accessed at PUT http://localhost:8080/api/candidate/:testresults)
+.put(function(req, res) {
+
+    // use our candidate model to find the candidate we want
+    candidatemodel.findOne({ login: req.body.candidateproof }, function(err, candidate) {
+
+        if (err) {
+            res.send(err);
+        } else {
+            
+            candidate.testresults = req.body.results; // update the user info
+            candidate.points = req.body.points;
+            // save the user
+            candidate.save(function(err) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    console.log("put statement has else")
+                    res.json({ message: 'candidate updated!' });
+                }
+
+            });
+
+        }
+
+
+    });
+})
+
+
+// delete the user with this email (accessed at DELETE http://localhost:8080/api/user/:testresults)
+.delete(function(req, res) {
+    usermodel.remove({
+        testresults: req.params.testresults
+    }, function(err, user) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json({ message: 'Successfully deleted' });
+        }
+    });
+})
 module.exports = router

@@ -1,6 +1,7 @@
 var express = require('express'); // call express
 var router = express.Router(); // get an instance of the express Router
 var usermodel = require('../models/user');
+var Candidatemodel = require('../models/Candidate');
 var jwt = require('jsonwebtoken');
 // on routes that end in /user
 // ----------------------------------------------------
@@ -368,30 +369,38 @@ router.route('/testresults')
     // use our user model to find the user we want
     usermodel.findOne({ login: req.body.userproof }, function(err, user) {
 
-        if (err) {
-            res.send(err);
-        } else {
-            console.log(user.login)
-            console.log("login reached")
-            user.testresults = req.body.results; // update the user info
-            user.points = req.body.points;
-            // save the user
-            user.save(function(err) {
-                if (err) {
-                    res.send(err);
-                } else {
-                    console.log("put statement has else")
-                    res.json({ message: 'user updated!' });
-                }
+            if (err) {
+                res.send(err);
+            } else {
+                console.log(user.login)
+                console.log("login reached")
+                user.testresults = req.body.results; // update the user info
+                user.points = req.body.points;
+                // save the user
+                user.save(function(err) {
+                        if (err) {
+                            res.send(err);
+                        } else {
+                            console.log("put statement has else")
+                            Candidatemodel.find({ testresults: req.body.results }, function(err, Candidates) {
+                                if (err) {
+                                    res.send(err);
+                                } else {
+                                    res.json({ message: 'user updated!', Candidates: Candidates });
 
-            });
+                                }
+                            })
 
-        }
+                        }
+
+                    
+
+                })
 
 
-    });
+        };
+    })
 })
-
 
 // delete the user with this email (accessed at DELETE http://localhost:8080/api/user/:testresults)
 .delete(function(req, res) {
@@ -405,4 +414,5 @@ router.route('/testresults')
         }
     });
 })
+
 module.exports = router

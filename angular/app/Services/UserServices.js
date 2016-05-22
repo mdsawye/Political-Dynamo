@@ -34,6 +34,9 @@ angular
             }
             return $http.put('/api/user/testresults', data)
         }
+        service.candidatematch=function(points,results, candidateName){
+            return $http.get('/api/candidate/testresults/'+candidateName, data)
+        }
         
         return service;
     });

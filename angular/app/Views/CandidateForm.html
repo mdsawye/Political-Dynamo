@@ -40,6 +40,15 @@
                 <label for="about_me">About Candidate</label>
                 <textarea ng-model="candidate.about" name="about_candidate"></textarea>
                 <br>
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 question" ng-repeat="question in questions">
+                        <div class="question-text">{{question.question}}</div>
+                        <button class="answer" ng-class="{clicked:answer.checked}" ng-repeat="answer in question.answers" ng-click="selectAnswer(answer, question)" ng-disabled="question.answerdone==true">{{answer.text}}</button>
+                    </div>
+                </div>
+                <br>
+                 <div ng-show="showchart" zingchart id="chart-1" zc-json="myJson" zc-width="100%" zc-height="568px"></div>
+                <br>
                 <label for="confirm">Confirm</label>
                 <input type="checkbox" name="confirm" ng-model="candidate.confirm">
                 <br>
@@ -49,4 +58,3 @@
         </div>
     </div>
 </header>
-

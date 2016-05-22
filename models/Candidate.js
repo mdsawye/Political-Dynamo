@@ -14,6 +14,8 @@ var CandidateSchema = new Schema({
     status: String,
     website: String,
     about_me: String,
+    testresults: String,
+    points: Number,
 
 
 

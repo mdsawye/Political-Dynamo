@@ -1,6 +1,6 @@
 //retrieving a module
 angular
-    .module('politics', ["ngRoute", "ngImgCrop", "chart.js"])
+    .module('politics', ["ngRoute", "ngImgCrop", 'zingchart-angularjs'])
     .run(function($rootScope, $http){
         // this code will be executed evertime the browser is refreshed
          $rootScope.userName=localStorage.getItem("userName");

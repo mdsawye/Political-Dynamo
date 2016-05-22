@@ -4,6 +4,7 @@ angular
         $scope.showliberaltxt = false;
         $scope.showmoderatetxt = false;
         $scope.showconservativetxt = false;
+        $scope.showchart = false
         console.log("Inside compatibility controller");
         $scope.points = 0;
         $scope.count = 0;
@@ -369,6 +370,11 @@ angular
                 value: 2
             }]
         }];
+        var CompletelyAgreeCounter = 0
+        var MostlyAgreeCounter = 0
+        var NeutralCounter = 0
+        var MostlyDisagreeCounter = 0
+        var CompletelyDisagreeCounter = 0
 
         $scope.selectAnswer = function(answer, question) {
             question.answerdone = true;
@@ -376,24 +382,22 @@ angular
             $scope.points = $scope.points + answer.value;
             $scope.count++;
             console.log($scope.points)
+            if (answer.value == -2) {
+                CompletelyDisagreeCounter++
+            } else if (answer.value == -1) {
+                MostlyDisagreeCounter++
+            } else if (answer.value == 0) {
+                NeutralCounter++
+            } else if (answer.value == 1) {
+                MostlyAgreeCounter++
+            } else if (answer.value == 2) {
+                CompletelyAgreeCounter++
+            }
+
         }
 
-        // This was added to sort data for pie chart
-        $scope.sortAnswer = function(answer, question) {
-            question.answerdone = true;
-            answer.checked = true;
-            answer.isSelected = true;
-            $scope.count++;
-            angular.forEach($scope.selectAnswer, function(answer) {
-                count += answer.isSelected ? -2 : -1: 0: 1: 2;
-            });
-            console.log($scope.count)
-        }
 
-        $scope.piechart = function($scope) {
-            $scope.labels = ["Conservative", "Moderate Conservative", "Moderate", "Moderate Liberal", "Liberal"];
-            $scope.data = $scope.count;
-        };
+
 
         $scope.Results = function() {
             var politicalleanins;
@@ -414,7 +418,62 @@ angular
                 $scope.showmoderatetxt = true;
                 politicalleanins = "moderate"
             }
-            UserServices.compatibilityresults($scope.points, politicalleanins, $rootScope.userName).then(function() {
+            $scope.myJson = {
+                globals: {
+                    shadow: false,
+                    fontFamily: "Verdana",
+                    fontWeight: "100"
+                },
+                type: "pie",
+                backgroundColor: "#fff",
+
+                legend: {
+                    layout: "x5",
+                    position: "50%",
+                    borderColor: "transparent",
+                    marker: {
+                        borderRadius: 10,
+                        borderColor: "transparent"
+                    }
+                },
+                tooltip: {
+                    text: "%v requests"
+                },
+                plot: {
+                    refAngle: "-90",
+                    borderWidth: "0px",
+                    valueBox: {
+                        placement: "in",
+                        text: "%npv %",
+                        fontSize: "15px",
+                        textAlpha: 1,
+                    }
+                },
+                series: [{
+                    text: "Conservative",
+                    values: [CompletelyDisagreeCounter],
+                    backgroundColor: "#FA6E6E #FA9494",
+                }, {
+                    text: "Moderate Conservative",
+                    values: [MostlyDisagreeCounter],
+                    backgroundColor: "#F1C795 #feebd2"
+                }, {
+                    text: "Moderate",
+                    values: [NeutralCounter],
+                    backgroundColor: "#FDAA97 #FC9B87"
+                }, {
+                    text: "Moderate Liberal",
+                    values: [MostlyAgreeCounter],
+                    backgroundColor: "#28C2D1 "
+                }, {
+                    text: "Liberal",
+                    values: [CompletelyAgreeCounter],
+                    backgroundColor: "#D2D6DE",
+                }]
+            };
+            $scope.showchart = true;
+            UserServices.compatibilityresults($scope.points, politicalleanins, $rootScope.userName).then(function(result) {
+                console.log(result)
                 console.log("results updated")
             })
         }
