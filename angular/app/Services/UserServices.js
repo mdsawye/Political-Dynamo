@@ -35,6 +35,11 @@ angular
             return $http.put('/api/user/testresults', data)
         }
         service.candidatematch=function(points,results, candidateName){
+            var data ={
+                candidateproof: candidateName,
+                total: points,
+                results: results
+            }
             return $http.get('/api/candidate/testresults/'+candidateName, data)
         }
         

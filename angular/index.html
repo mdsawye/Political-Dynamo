@@ -51,7 +51,7 @@
                         <a href="#/UserForm">Sign Up</a>
                     </li>
                     <li class="page-scroll" ng-if="userName">
-                        <a href="#/UsersList">Users List</a>
+                        <a href="#/Election">Election Info</a>
                     </li>
                     <li class="page-scroll">
                         <a href="#/News">Political News</a>
@@ -140,6 +140,8 @@
     </div>
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
+    <script src="js/raphael.js"></script>
+  <script src="js/jquery.usmap.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
     <!-- Plugin JavaScript -->
@@ -172,7 +174,7 @@
     <!--I am linking the script FILES-->
     <script src="app/Controllers/HomeController.js"></script>
     <script src="app/Controllers/UserFormController.js"></script>
-    <script src="app/Controllers/UserListController.js"></script>
+    <script src="app/Controllers/ElectionController.js"></script>
     <script src="app/Controllers/ContactController.js"></script>
     <script src="app/Controllers/NewsController.js"></script>
     <script src="app/Controllers/DomesticIssueController.js"></script>

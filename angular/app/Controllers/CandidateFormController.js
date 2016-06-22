@@ -431,6 +431,23 @@ angular
         $scope.Results = function() {
             var politicalleanins;
 
+            if ($scope.points >= 19 && $scope.points <= 40) {
+                $scope.showliberaltxt = true;
+                politicalleanins = "Liberal"
+            } else if ($scope.points <= 18 && $scope.points >= 6) {
+                $scope.showmodLiberaltxt = true;
+                politicalleanins = "modLiberal"
+            } else if ($scope.points <= -19 && $scope.points >= -40) {
+                $scope.showconservativetxt = true;
+                politicalleanins = "conservative"
+            } else if ($scope.points >= -18 && $scope.points <= -6) {
+                $scope.showmodconservativetxt = true;
+                politicalleanins = "modconservative"
+            } else if ($scope.points <= 5 && $scope.points >= -5) {
+                $scope.showmoderatetxt = true;
+                politicalleanins = "moderate"
+            }
+            $scope.candidate.testresults= politicalleanins
             $scope.myJson = {
                 globals: {
                     shadow: false,
@@ -494,6 +511,7 @@ angular
 
         $scope.candidate = {};
         $scope.SubmitForm = function() {
+            $scope.Results()
             $scope.candidate.image = $scope.myCroppedImage
             CandidateServices.addcandidate($scope.candidate).then(function() {
                 alert("Candidate's profile has been saved")

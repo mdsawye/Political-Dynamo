@@ -14,7 +14,6 @@
                     <button class="answer" ng-class="{clicked:answer.checked}" ng-repeat="answer in question.answers" ng-click="selectAnswer(answer, question)" ng-disabled="question.answerdone==true">{{answer.text}}</button>
                 </div>
             </div>
-            
         </div>
         <button class="btn-success btn" ng-click="Results()" ng-disabled="count!=20">Submit Quiz</button>
         <div ng-show="showliberaltxt">
@@ -32,9 +31,10 @@
         <div ng-show="showconservativetxt">
             <p>You are highly conservative</p>
         </div>
-         <div ng-show="showchart" zingchart id="chart-1" zc-json="myJson" zc-width="100%" zc-height="568px"></div>
-  </div>
-  <div > </div>
+        <div ng-show="showchart" zingchart id="piechart" zc-json="myJson" zc-width="100%" zc-height="568px"></div>
+        <div ng-show="showchart" zingchart id="linechart" zc-json="myJson1" zc-width="100%" zc-height="568px"></div>
+        </div>
+        <div> </div>
         </div>
     </section>
 </header>

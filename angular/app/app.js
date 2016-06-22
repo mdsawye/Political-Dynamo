@@ -19,9 +19,9 @@ angular
                     templateUrl: 'app/views/UserForm.html',
                     controller: 'UsrFrmCtrl'
                 })
-                .when('/UsersList', {
-                    templateUrl: 'app/views/UserList.html',
-                    controller: 'UsersListCtrl'
+                .when('/Election', {
+                    templateUrl: 'app/views/Election.html',
+                    controller: 'ElectionCtrl'
                 })
                  .when('/News', {
                     templateUrl: 'app/views/News.html',

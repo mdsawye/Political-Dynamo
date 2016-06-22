@@ -34,6 +34,9 @@ router.route('/')
     user.password = req.body.password // set the password
     user.firstname = req.body.firstname; // set the user first name (comes from the request)
     user.lastname = req.body.lastname; // set the user last name (comes from the request)
+    user.image_id=result.public_id;
+    user.image_url=result.url;
+    user.party = req.body.party;
     user.phone = req.body.phone; // set the user phone (comes from the request)
     user.email = req.body.email // set the user email (comes from the request)
     user.about_me = req.body.about_me // set the user about me (comes from the request)
