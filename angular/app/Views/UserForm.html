@@ -2,44 +2,40 @@
     <div class="container">
         <div class="row">
             <form name="userform">
-
                 <label for="login">login</label>
-                <input type="text" name="login" ng-model="user.login" placeholder="login name" required><br>
-
-
+                <input type="text" name="login" ng-model="user.login" placeholder="login name" required>
+                <br>
                 <label for="password">password</label>
-                <input type="text" name="password" ng-model="user.password" placeholder="password" required><br>
-
-
-                <!--<label for="State">State</label>-->
-                <!--<select name="State" ng-model="data.State" ng-options="country for country in ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',-->
-                <!--'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',-->
-                <!--'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',-->
-                <!--'Missouri', 'Montana', 'Nebraska', 'Nevada',             'New Hampshire', 'New Jersey', 'New Mexico', 'New York',-->
-                <!--'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina',-->
-                <!--'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',-->
-                <!--'Virginia', 'Washington', 'West Virginia', 'Wisconsin',-->
-                <!--'Wyoming']" required>...</select>-->
-
+                <input type="password" name="password" ng-model="user.password" placeholder="password" required>
                 <br>
                 <label for="firstname">First Name</label>
                 <input type="text" name="firstname" ng-model="user.firstname" placeholder="First Name">
                 <label for="lastname">Last Name</label>
-                <input type="text" name="lastname" ng-model="user.lastname" placeholder="Last Name"><br>
+                <input type="text" name="lastname" ng-model="user.lastname" placeholder="Last Name">
+                <br>
+                <label for="State">State</label>
+                <select class="StateSelect" name="State" ng-model="data.State" ng-options="x.State as x.State for x in States">{{selectedState.States}}</select>
+                <br>
+                <div>Select an image file:
+                    <input type="file" id="fileInput" />
+                </div>
+                <div class="cropArea">
+                    <img-crop image="myImage" area-type="square" result-image="myCroppedImage"></img-crop>
+                </div>
+                <div>Cropped Image:</div>
+                <div><img ng-src="{{myCroppedImage}}" /></div>
                 <label for="phone">Phone</label>
                 <input type="text" name="phone" ng-model="user.phone" placeholder="Phone">
                 <label for="email">Email</label>
-                <input type="text" name="email" ng-model="user.email" placeholder="Email"><br><br>
-
-
-                <label for="male">Male</label>
-                <input type="radio" name="gender" ng-model="user.gender" value="male">
-
-                <label for="female">Female</label>
-                <input type="radio" name="gender" ng-model="user.gender" value="female"><br>
-
+                <input type="text" name="email" ng-model="user.email" placeholder="Email">
+                <br>
+                <br>
+                <label for="party">Political Party</label>
+                <select class="StateSelect" name="party" ng-model="candidate.party" ng-options="x.party as x.party for x in parties">{{selectedparty.parties}}</select>
+                <br>
                 <label for="about_me">About Me</label>
-                <textarea ng-model="user.about" name="about_me"></textarea><br>
+                <textarea ng-model="user.about" name="about_me"></textarea>
+                <br>
                 <label for="confirm">Confirm</label>
                 <input type="checkbox" name="confirm" ng-model="user.confirm">
                 <br>

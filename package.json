@@ -1,11 +1,12 @@
-
 {
-    "name": "politics",
-    "author": "Michael Sawyer",
-    "main": "server.js",
-    "dependencies": {
-        "express": "*",
-        "mongoose": "*",
-        "body-parser": "*"
-    }
+  "name": "politics",
+  "author": "Michael Sawyer",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "*",
+    "express": "*",
+    "jsonwebtoken": "^5.7.0",
+    "mongoose": "*",
+    "nodemailer": "0.7.1"
+  }
 }

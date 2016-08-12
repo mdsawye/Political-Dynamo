@@ -1,0 +1,22 @@
+<!-- Header -->
+<header>
+    <div class="container">
+        <div class="row">
+            <!-- <div> -->
+                <div>
+                    <!-- <form action="action_page.php">
+                    Candidate Search:
+                    <input type="search" name="federalcandidatesearch">
+                    <input type="submit">
+                </form> -->
+                    <a href="#" class="col-xs-6 col-md-3">
+                        <div class="thumbnail" ng-repeat="Candidate in Candidates">{{Candidate.firstname}} {{Candidate.lastname}}
+                            <img ng-src="{{Candidate.image_url}}">
+                        </div>
+                    </a>
+                    
+                </div>
+            <!-- </div> -->
+        </div>
+    </div>
+</header>

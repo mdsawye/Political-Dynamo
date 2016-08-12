@@ -9,9 +9,39 @@ angular
         service.adduser= function(user) {
             console.log("add user in service")
             console.log(user)
-            return $http.post('/api/user',user);
+            return $http.post('/api/authentication/register',user);
         }
 
+       service.userlogin= function(userlogin, userpassword) {
+            console.log(userlogin)
+            console.log(userpassword)
+            var data ={
 
+                login: userlogin ,
+                password: userpassword
+            }
+            return $http.post('/api/authentication/login', data);
+           
+        } 
+        service.admincheck= function(admincheck){
+            return $http.get('/api/authentication/admincheck/'+ admincheck);
+        }
+        service.compatibilityresults= function(points, results, userName){
+            var data ={
+                userproof: userName,
+                total: points,
+                results: results
+            }
+            return $http.put('/api/user/testresults', data)
+        }
+        service.candidatematch=function(points,results, candidateName){
+            var data ={
+                candidateproof: candidateName,
+                total: points,
+                results: results
+            }
+            return $http.get('/api/candidate/testresults/'+candidateName, data)
+        }
+        
         return service;
     });
