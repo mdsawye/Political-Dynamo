@@ -1,6 +1,6 @@
 angular
     .module('politics')
-    .controller('HomeCtrl', function($scope, $rootScope, $http, UserServices) {
+    .controller('HomeCtrl', function($scope, $rootScope, $http, $location, UserServices) {
         var ctrltest = "yes";
         $scope.user = {};
         $scope.userlogin = ""
@@ -17,8 +17,12 @@ angular
                 localStorage.setItem("admin", result.data.admin);
                 localStorage.setItem("token", result.data.token);
             })
-            
-       
-          
+
+
+
+        }
+
+        $scope.go = function(path) {
+            $location.path('/UserForm');
         }
     })

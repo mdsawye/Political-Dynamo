@@ -3,11 +3,12 @@ var express = require('express'); // call express
 var app = express(); // define our app using express
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var userroutes = require("./Routes/Userroutes")
-var Candidateroutes = require("./Routes/Candidateroutes")
-var Authenticationroutes = require("./Routes/Authenticationroutes")
-var Contactroutes = require("./Routes/Contactroutes")
-var cloudinary = require('cloudinary')
+var userroutes = require("./Routes/Userroutes");
+var Candidateroutes = require("./Routes/Candidateroutes");
+var Authenticationroutes = require("./Routes/Authenticationroutes");
+var Contactroutes = require("./Routes/Contactroutes");
+var cloudinary = require('cloudinary');
+
     //database connection
 
 mongoose.connect('mongodb://admin:admin@ds047865.mongolab.com:47865/projectprime');

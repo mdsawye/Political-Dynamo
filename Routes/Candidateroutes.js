@@ -3,6 +3,9 @@ var router = express.Router(); // get an instance of the express Router
 var Candidatemodel = require('../models/Candidate');
 var jwt = require('jsonwebtoken');
 var cloudinary = require('cloudinary');
+
+
+
 // on routes that end in /Candidate
 // ----------------------------------------------------
 router.use(function(req, res, next) {
@@ -25,39 +28,41 @@ router.use(function(req, res, next) {
         }
     });
 })
+
+
 router.route('/register')
 
 // create a Candidate (accessed at POST http://localhost:8080/api/user)
 .post(function(req, res) {
-    cloudinary.uploader.upload(req.body.image, function(result) { 
-  console.log(result) 
-   var candidate = new Candidatemodel(); // create a new instance of the Candidate model
-    // candidate.login = req.body.login // set the login name
-    //  candidate.password = req.body.password // set the password
-    candidate.firstname = req.body.firstname; // set the user first name (comes from the request)
-    candidate.lastname = req.body.lastname; // set the user last name (comes from the request)
-    candidate.image_id=result.public_id
-    candidate.image_url=result.url
-    candidate.title = req.body.title; // set the user title (comes from the request)
-    candidate.level = req.body.level;
-    candidate.state = req.body.state;
-    candidate.district = req.body.district;
-    candidate.party = req.body.party;
-    candidate.status = req.body.status;
-    candidate.website = req.body.website;
-    candidate.about_candidate = req.body.about_candidate;
-    candidate.testresults = req.body.testresults;
-    candidate.points = req.body.points;
-    // save the candidate and check for errors
-    candidate.save(function(err) {
-        if (err) {
-            res.send(err);
-        } else {
+    cloudinary.uploader.upload(req.body.image, function(result) {
+        console.log(result)
+        var candidate = new Candidatemodel(); // create a new instance of the Candidate model
+        // candidate.login = req.body.login // set the login name
+        //  candidate.password = req.body.password // set the password
+        candidate.firstname = req.body.firstname; // set the user first name (comes from the request)
+        candidate.lastname = req.body.lastname; // set the user last name (comes from the request)
+        candidate.image_id = result.public_id
+        candidate.image_url = result.url
+        candidate.title = req.body.title; // set the user title (comes from the request)
+        candidate.level = req.body.level;
+        candidate.state = req.body.state;
+        candidate.district = req.body.district;
+        candidate.party = req.body.party;
+        candidate.status = req.body.status;
+        candidate.website = req.body.website;
+        candidate.about_candidate = req.body.about_candidate;
+        candidate.testresults = req.body.testresults;
+        candidate.points = req.body.points;
+        // save the candidate and check for errors
+        candidate.save(function(err) {
+            if (err) {
+                res.send(err);
+            } else {
 
-            res.json({ message: 'Candidate created!' });
-        }
+                res.json({ message: 'Candidate created!' });
+            }
+        });
     });
-});
 
 
 });
@@ -74,6 +79,8 @@ router.route('/')
         }
     });
 });
+
+
 
 router.route('/Federal')
 
@@ -611,7 +618,7 @@ router.route('/testresults/:candidate_name')
         if (err) {
             res.send(err);
         } else {
-            
+
             candidate.testresults = req.body.results; // update the user info
             candidate.points = req.body.points;
             // save the user

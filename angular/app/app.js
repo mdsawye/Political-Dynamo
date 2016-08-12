@@ -47,22 +47,22 @@ angular
                     templateUrl: 'app/views/Compatibility.html',
                     controller: 'CompatibilityCtrl'
                 })
-                .when('/CandidateProfiles', {
-                    templateUrl: 'app/views/CandidateProfiles.html',
-                    controller: 'CandidateProfilesCtrl'
+                // .when('/Congress', {
+                //     templateUrl: 'app/views/Congress.html',
+                //     controller: 'CandidateProfilesCtrl'
+                // })
+                // .when('/FederalCongress', {
+                //     templateUrl: 'app/views/FederalCongress.html',
+                //     controller: 'FederalProfilesCtrl'
+                // })
+                .when('/StateCongress', {
+                    templateUrl: 'app/views/StateCongress.html',
+                    controller: 'StateCongressCtrl'
                 })
-                .when('/FederalCandidateProfiles', {
-                    templateUrl: 'app/views/FederalCandidateProfiles.html',
-                    controller: 'FederalProfilesCtrl'
-                })
-                .when('/StateCandidateProfiles', {
-                    templateUrl: 'app/views/StateCandidateProfiles.html',
-                    controller: 'StateProfilesCtrl'
-                })
-                .when('/JudiciaryCandidateProfiles', {
-                    templateUrl: 'app/views/JudiciaryCandidateProfiles.html',
-                    controller: 'JudiciaryProfilesCtrl'
-                })
+                // .when('/JudiciaryCandidateProfiles', {
+                //     templateUrl: 'app/views/JudiciaryCandidateProfiles.html',
+                //     controller: 'JudiciaryProfilesCtrl'
+                // })
                 .when('/CandidateForm', {
                     templateUrl: 'app/views/CandidateForm.html',
                     controller: 'CandidateFrmCtrl'

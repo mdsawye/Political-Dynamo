@@ -12,7 +12,7 @@ angular
                 {State:'South Dakota'}, {State:'Tennessee'}, {State:'Texas'}, {State:'Utah'}, {State:'Vermont'},
                 {State:'Virginia'}, {State:'Washington'}, {State:'West Virginia'}, {State:'Wisconsin'},
                 {State:'Wyoming'}]
-         $scope.parties = [{ party: "Democrat" }, { party: "Republican" }, { party: "Independent" }]
+         $scope.parties = [{ party: "Democrat" }, { party: "Republican" }, { party: "Libertarian" }, { party: "Green" }, { party: "Constitution" }, ]
 
         $scope.SubmitForm = function () {
             UserServices.adduser($scope.user).then(function(){

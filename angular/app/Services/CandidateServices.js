@@ -33,7 +33,8 @@ angular
                 results: results
             }
             return $http.put('/api/candidate/testresults', data)
-        }
+        };
+        
 
         return service;
     });
